@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ This file is part of Linyin, Peng Wan's graduation project in Haut.
+  ~ Copyright (C) 2016 Peng Wan <phylame@163.com>. All Rights Reserved.
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pw.phylame.linyin.data.mapper.MerchantMapper">
+  <cache type="org.mybatis.caches.memcached.MemcachedCache"/>
+  <cache type="org.mybatis.caches.memcached.LoggingMemcachedCache"/>
+  <resultMap id="MerchantMap" type="pw.phylame.linyin.domain.Merchant">
+    <id column="tag_id" jdbcType="BIGINT" property="tagId"/>
+    <id column="vendor_id" jdbcType="BIGINT" property="vendorId"/>
+    <result column="intro" jdbcType="VARCHAR" property="intro"/>
+  </resultMap>
+  <sql id="MerchantColumns">
+    vendor_id, tag_id, intro
+  </sql>
+  <select id="selectTagsByTag" parameterType="long" resultMap="pw.phylame.linyin.data.mapper.TagMapper.TagMap">
+    SELECT
+      t.tag_id,
+      t.name,
+      t.creator_id,
+      t.intro
+    FROM tag
+         t, merchant m
+    WHERE t.tag_id = m.tag_id AND m.tag_id = #{tagId,jdbcType=BIGINT}
+  </select>
+  <select id="selectTagsByVendor" parameterType="long" resultMap="pw.phylame.linyin.data.mapper.TagMapper.TagMap">
+    SELECT
+      t.tag_id,
+      t.name,
+      t.creator_id,
+      t.intro
+    FROM tag t, merchant m
+    WHERE t.tag_id = m.tag_id AND m.vendor_id = #{vendorId,jdbcType=BIGINT}
+  </select>
+  <select id="selectByTagAndVendor" parameterType="map" resultMap="MerchantMap">
+    select
+    <include refid="MerchantColumns"/>
+    from merchant
+    where vendor_id = #{vendorId,jdbcType=BIGINT} and tag_id = #{tagId,jdbcType=BIGINT}
+    limit 1
+  </select>
+  <delete id="deleteByTagAndVendor" parameterType="map">
+    DELETE FROM merchant
+    WHERE vendor_id =
+    #{vendorId,jdbcType=BIGINT} AND tag_id = #{tagId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="pw.phylame.linyin.domain.Merchant">
+    INSERT INTO merchant (vendor_id, tag_id, intro)
+    VALUES
+      (#{vendorId,jdbcType=BIGINT}, #{tagId,jdbcType=BIGINT}, #{intro,jdbcType=VARCHAR})
+  </insert>
+  <update id="update" parameterType="pw.phylame.linyin.domain.Merchant">
+    UPDATE merchant
+    SET intro = #{intro,jdbcType=VARCHAR}
+    WHERE
+      vendor_id
+      = #{vendorId,jdbcType=BIGINT} AND tag_id = #{tagId,jdbcType=BIGINT}
+  </update>
+</mapper>

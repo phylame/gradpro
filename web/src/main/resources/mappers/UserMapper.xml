@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ This file is part of Linyin, Peng Wan's graduation project in Haut.
+  ~ Copyright (C) 2016 Peng Wan <phylame@163.com>. All Rights Reserved.
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pw.phylame.linyin.data.mapper.UserMapper">
+  <cache type="org.mybatis.caches.memcached.MemcachedCache"/>
+  <cache type="org.mybatis.caches.memcached.LoggingMemcachedCache"/>
+  <resultMap id="UserMap" type="pw.phylame.linyin.pojo.User">
+    <id column="account_id" property="accountId" jdbcType="BIGINT"/>
+    <result column="name" property="name" jdbcType="VARCHAR"/>
+    <result column="telephone" property="telephone" jdbcType="VARCHAR"/>
+    <result column="location_id" property="locationId" jdbcType="BIGINT"/>
+    <result column="intro" property="intro" jdbcType="VARCHAR"/>
+  </resultMap>
+  <sql id="UserColumns">
+    u.account_id, u.name, u.telephone, u.intro
+  </sql>
+  <select id="count" resultType="long">
+    SELECT count(1)
+    FROM user_detail
+  </select>
+  <select id="selectAll" resultMap="UserMap">
+    select
+    <include refid="UserColumns"/>
+    from user_detail u
+  </select>
+  <select id="selectById" resultMap="UserMap" parameterType="java.lang.Long">
+    select
+    <include refid="UserColumns"/>
+    from user_detail u
+    where account_id = #{accountId,jdbcType=BIGINT}
+    limit 1
+  </select>
+  <select id="selectByNameLike" resultMap="UserMap" parameterType="string">
+    select
+    <include refid="UserColumns"/>
+    from user_detail u
+    where name like #{name,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByTagId" parameterType="long" resultMap="UserMap">
+    select
+    <include refid="UserColumns"/>
+    from user_detail u, merchant m
+    where m.tag_id = #{tagId,jdbcType=BIGINT} and m.vendor_id = u.account_id
+  </select>
+  <select id="countForTagId" parameterType="long" resultType="long">
+    SELECT count(1)
+    FROM user_detail u, merchant m
+    WHERE
+      m.tag_id = #{tagId,jdbcType=BIGINT} and m.vendor_id = u.account_id
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    DELETE FROM user_detail
+    WHERE account_id =
+    #{accountId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="pw.phylame.linyin.pojo.User">
+    INSERT INTO user_detail (account_id, name, telephone, location_id,
+                             intro)
+    VALUES
+      (
+        #{accountId,jdbcType=BIGINT},
+        #{name,jdbcType=VARCHAR},
+        #{telephone,jdbcType=VARCHAR},
+        #{locationId,jdbcType=BIGINT},
+        #{intro,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateById" parameterType="pw.phylame.linyin.pojo.User">
+    UPDATE user_detail
+    SET
+      name = #{name,jdbcType=VARCHAR},
+      telephone
+      =
+      #{telephone,jdbcType=VARCHAR},
+      location_id = #{locationId,jdbcType=BIGINT},
+      intro =
+    #{intro,jdbcType=VARCHAR}
+    WHERE
+      account_id = #{accountId,jdbcType=BIGINT}
+  </update>
+</mapper>

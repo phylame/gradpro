@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ This file is part of Linyin, Peng Wan's graduation project in Haut.
+  ~ Copyright (C) 2016 Peng Wan <phylame@163.com>. All Rights Reserved.
+  -->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer"
+        p:defaultEncoding="${freemarker.defaultEncoding}" p:templateLoaderPath="${freemarker.templateLoaderPath}">
+    <property name="freemarkerSettings">
+      <props>
+        <prop key="template_update_delay">${freemarker.conf.template_update_delay}</prop>
+        <prop key="classic_compatible">true</prop>
+        <prop key="template_exception_handler">ignore</prop>
+        <prop key="auto_import">${freemarker.conf.auto_import}</prop>
+      </props>
+    </property>
+    <property name="freemarkerVariables">
+      <map>
+        <entry key="xml_escape" value-ref="fmXmlEscape"/>
+      </map>
+    </property>
+  </bean>
+
+  <bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape"/>
+
+  <bean id="ftlResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver"
+        p:contentType="${freemarker.view.contentType}" p:suffix="${freemarker.view.suffix}"
+        p:cache="${freemarker.view.cache}"
+        p:exposeSpringMacroHelpers="${freemarker.view.exposeSpringMacroHelpers}"
+        p:exposeSessionAttributes="${freemarker.view.exposeSessionAttributes}"
+        p:exposeRequestAttributes="${freemarker.view.exposeRequestAttributes}"
+        p:allowSessionOverride="${freemarker.view.allowSessionOverride}"
+        p:order="1"/>
+</beans>

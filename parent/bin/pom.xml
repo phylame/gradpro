@@ -1,0 +1,217 @@
+<!--
+  ~ This file is part of Linyin, Peng Wan's graduation project in Haut.
+  ~ Copyright (C) 2016 Peng Wan <phylame@163.com>. All Rights Reserved.
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>pw-projectly</groupId>
+  <artifactId>parent</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <properties>
+    <!--encoding for source code and resources -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <!--compiler configurations -->
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.debug>true</maven.compiler.debug>
+    <maven.compiler.optimize>true</maven.compiler.optimize>
+
+    <!-- lombok -->
+    <lombok.version>1.16.8</lombok.version>
+
+    <!-- json -->
+    <jackson.version>2.7.3</jackson.version>
+
+    <!-- log -->
+    <slf4j.version>1.7.19</slf4j.version>
+
+    <!-- test -->
+    <testng.version>6.9.10</testng.version>
+
+    <!--aop -->
+    <aspectj.version>1.8.9</aspectj.version>
+
+    <!--Spring -->
+    <spring.version>4.2.5.RELEASE</spring.version>
+    <spring-mongo.version>1.8.4.RELEASE</spring-mongo.version>
+    <spring-dao.version>2.0.8</spring-dao.version>
+
+    <!-- active mq -->
+    <activemq.version>5.13.2</activemq.version>
+    <activemq-spring.version>5.13.2</activemq-spring.version>
+
+    <!-- mqtt client -->
+    <paho.version>1.0.2</paho.version>
+
+    <!--database -->
+    <mysql.version>5.1.38</mysql.version>
+    <c3p0.version>0.9.5.2</c3p0.version>
+    <mybatis.version>3.3.1</mybatis.version>
+    <mybatis-spring.version>1.2.4</mybatis-spring.version>
+    <mybatis-memcached.version>1.0.0</mybatis-memcached.version>
+    <pagehelper.version>4.1.3</pagehelper.version>
+
+    <!-- validator -->
+    <hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
+
+    <!-- freemarker -->
+    <freemarker.version>2.3.23</freemarker.version>
+
+    <!-- servlet api -->
+    <servlet-api.version>3.0.1</servlet-api.version>
+
+    <!-- jstl -->
+    <jstl.version>1.2</jstl.version>
+
+    <!-- commons -->
+    <commons-io.version>2.4</commons-io.version>
+    <commons-chain.version>1.2</commons-chain.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- lombok -->
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${lombok.version}</version>
+      </dependency>
+      <!-- json -->
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>${jackson.version}</version>
+      </dependency>
+      <!-- log -->
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-log4j12</artifactId>
+        <version>${slf4j.version}</version>
+      </dependency>
+      <!-- test -->
+      <dependency>
+        <groupId>org.testng</groupId>
+        <artifactId>testng</artifactId>
+        <version>${testng.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <!-- validator -->
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-validator</artifactId>
+        <version>${hibernate-validator.version}</version>
+      </dependency>
+
+      <!-- freemarker -->
+      <dependency>
+        <groupId>org.freemarker</groupId>
+        <artifactId>freemarker</artifactId>
+        <version>${freemarker.version}</version>
+      </dependency>
+
+      <!-- servlet api -->
+      <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>${servlet-api.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <!-- jstl -->
+      <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>jstl</artifactId>
+        <version>${jstl.version}</version>
+      </dependency>
+      <!-- spring -->
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-web</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-webmvc</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context-support</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <!-- active mq -->
+      <dependency>
+        <groupId>org.apache.activemq</groupId>
+        <artifactId>activemq-broker</artifactId>
+        <version>${activemq.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.activemq</groupId>
+        <artifactId>activemq-spring</artifactId>
+        <version>${activemq-spring.version}</version>
+      </dependency>
+
+      <!-- paho mqtt -->
+      <dependency>
+        <groupId>org.eclipse.paho</groupId>
+        <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
+        <version>${paho.version}</version>
+      </dependency>
+
+      <!-- database -->
+      <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>${mysql.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.mchange</groupId>
+        <artifactId>c3p0</artifactId>
+        <version>${c3p0.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.mybatis</groupId>
+        <artifactId>mybatis</artifactId>
+        <version>${mybatis.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.mybatis</groupId>
+        <artifactId>mybatis-spring</artifactId>
+        <version>${mybatis-spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.mybatis.caches</groupId>
+        <artifactId>mybatis-memcached</artifactId>
+        <version>${mybatis-memcached.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.github.pagehelper</groupId>
+        <artifactId>pagehelper</artifactId>
+        <version>${pagehelper.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.data</groupId>
+        <artifactId>spring-data-mongodb</artifactId>
+        <version>${spring-mongo.version}</version>
+      </dependency>
+
+      <!-- commons -->
+      <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>${commons-io.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-chain</groupId>
+        <artifactId>commons-chain</artifactId>
+        <version>${commons-chain.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+</project>

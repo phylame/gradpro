@@ -1,0 +1,88 @@
+/*
+ * This file is part of Linyin, Peng Wan's graduation project in Haut.
+ * Copyright (C) 2016 Peng Wan <phylame@163.com>. All Rights Reserved.
+ */
+
+@charset "UTF-8";
+
+.ly-form {
+  padding: 0;
+  margin: 10px 0;
+  text-align: center;
+}
+
+.ly-form table {
+  margin: 0 auto;
+  border-spacing: 0.2em 0.5em;
+}
+
+.ly-form th {
+  padding-right: 0.5em;
+  color: #222;
+  font-size: 1em;
+  font-weight: bold;
+  text-align: right;
+  vertical-align: baseline;
+}
+
+.ly-form td {
+  text-align: left;
+}
+
+.ly-form .error {
+  color: red;
+}
+
+.ly-form td .field-error {
+  color: red;
+  width: 14em;
+}
+
+.ly-form td .text {
+  width: 16em;
+  padding: 0.2em;
+  border-radius: 0;
+  border: 1px solid #CCC;
+  font-size: 1em;
+}
+
+.ly-form td .long-text {
+  width: 16em;
+  height: 4em;
+  padding: 0.2em;
+  resize: none;
+  font-size: 1em;
+  font-family: "default-font", sans-serif;
+  border-radius: 0;
+  border: 1px solid #CCC;
+}
+
+.ly-form td .select {
+  width: 16em;
+  font-size: 1em;
+  padding: 0.1em;
+  border: 1px solid #CCC;
+}
+
+.ly-form td .select option {
+  margin: 5px auto;
+}
+
+.ly-form td .text:focus, .long-text:focus, .select:focus {
+  outline-color: #008B8B;
+}
+
+.ly-form td .button {
+  border: 0 solid #000;
+  border-radius: 3px;
+  padding: 0.2em 0.7em;
+  cursor: pointer;
+  box-shadow: 2px 2px 4px #888888;
+  background: #008B8B;
+  color: #DDD;
+  font-size: 1em;
+}
+
+.ly-form td .button:hover {
+  background: #00b7c3;
+}

@@ -1,0 +1,83 @@
+@CHARSET "UTF-8";
+
+#v-table {
+  margin: 0 auto;
+  border-spacing: 0;
+}
+
+#v-table th, #v-table td {
+  padding: 2px 8px;
+}
+
+#v-table thead tr {
+  background: #E6E8FA;
+  text-align: center;
+}
+
+#v-table tbody tr {
+  background: transparent;
+  text-align: left;
+}
+
+#v-table tbody tr.alt {
+  background: #F5F5F7;
+}
+
+#v-table tbody tr:hover {
+  background: #E1E1E2;
+}
+
+#h-table {
+  margin: 0 auto;
+  border-spacing: 0.2em 0.5em;
+}
+
+#h-table th {
+  font-size: 1em;
+  font-weight: bold;
+  text-align: right;
+  padding-right: 0.5em;
+  vertical-align: baseline;
+}
+
+#h-table td {
+  text-align: left;
+}
+
+#h-table td .text {
+  width: 16em;
+  padding: 0.2em;
+  border-radius: 0;
+  border: 1px solid #CCC;
+  font-size: 1em;
+}
+
+#h-table td .select {
+  width: 16.5em;
+  padding: 0.1em 0;
+  border: 1px solid #CCC;
+  font-size: 1em;
+}
+
+#h-table td .select option {
+
+}
+
+#h-table td .long-text {
+  width: 16em;
+  height: 4em;
+  padding: 0.2em;
+  border-radius: 0;
+  border: 1px solid #CCC;
+  resize: none;
+  font-family: "default-font", sans-serif;
+  font-size: 1em;
+}
+
+#h-table td .text:focus, #h-table td .long-text:focus, #h-table td .select:focus {
+  outline-color: #008B8B;
+}
+
+#h-table td .error {
+  color: red;
+}

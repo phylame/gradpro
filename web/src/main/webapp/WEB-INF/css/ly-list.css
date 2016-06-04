@@ -1,0 +1,47 @@
+/*
+ * This file is part of Linyin, Peng Wan's graduation project in Haut.
+ * Copyright (C) 2016 Peng Wan <phylame@163.com>. All Rights Reserved.
+ */
+
+@CHARSET "UTF-8";
+
+.list-item {
+  margin-bottom: 5px;
+}
+
+.list-item .link {
+  margin: 0;
+  padding: 0;
+  font-size: 15px;
+}
+
+.list-item .content {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+}
+
+.list-item .intro {
+  color: #3498DB;
+  text-overflow: ellipsis;
+}
+
+.list-item .button {
+  margin-left: 5px;
+  border: 0;
+  padding: 0;
+  height: 38px;
+  cursor: pointer;
+  background: transparent;
+}
+
+.list-item .button:focus {
+  outline-color: transparent;
+}
+
+.list-item .button img {
+  border: 0;
+  padding: 0;
+  width: 38px;
+  height: 38px;
+}

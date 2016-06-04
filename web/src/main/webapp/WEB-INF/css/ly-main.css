@@ -1,0 +1,292 @@
+/*
+ * This file is part of Linyin, Peng Wan's graduation project in Haut.
+ * Copyright (C) 2016 Peng Wan <phylame@163.com>. All Rights Reserved.
+ */
+
+@charset "UTF-8";
+
+@font-face {
+  font-family: "default-font";
+  src: local("Microsoft YaHei"), local("Verdana"), local("Helvitica"), local("sans-serif");
+}
+
+:root {
+  ---ly-color-light: #ECF0F1;
+  --ly-color-green: #2ECC71;
+  --ly-color-cyan: #1ABC9C;
+  --ly-color-blue: #3498DB;
+  --ly-color-yellow: #F1C40F;
+  --ly-color-red: #E74C3C;
+  --ly-color-gray: #555555;
+  --ly-color-dark: #222;
+  --ly-color-sliver: #E6E8FA;
+}
+
+body, form, table, select {
+  margin: 0;
+  padding: 0;
+  font-family: "default-font", sans-serif;
+}
+
+body {
+  background: #E6E8FA;
+}
+
+a {
+  color: blue;
+}
+
+a:link, a.visited {
+  text-decoration: none;
+}
+
+a:hover, a:active {
+  text-decoration: underline;
+}
+
+.wrapper {
+  padding: 0 42px;
+  margin: 0 auto;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.clear {
+  clear: both;
+}
+
+.blur {
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.warn {
+  color: #E74C3C;
+  font-weight: bold;
+}
+
+.inline-list {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  list-style: none;
+}
+
+.inline-list li {
+  margin: 0;
+  padding: 0;
+  float: left;
+}
+
+.container {
+  width: 980px;
+  margin: 0 auto;
+  padding: 0 20px;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 5px 5px 10px #888888;
+  background: #FFF;
+}
+
+.top-bar {
+  margin-bottom: 10px;
+  background: #00796f;
+  border-radius: 0 0 6px 6px;
+  box-shadow: 0 5px 10px #888888;
+}
+
+.menu-bar {
+
+}
+
+.menu-bar ul {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  list-style: none;
+}
+
+.menu-bar ul li {
+  float: left;
+}
+
+.menu-bar a {
+  font-size: 14px;
+}
+
+.menu-bar a:link, .menu-bar a:visited {
+  display: block;
+  width: 43px;
+  padding: 4px 6px;
+  color: #EEE;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.menu-bar a:hover, .menu-bar a:active {
+  color: #222;
+  background: #EEE;
+}
+
+.user-bar {
+  color: #DDD;
+  padding: 5px 0;
+  font-size: 13px;
+}
+
+.user-bar a {
+  color: #D9D919;
+  text-decoration: none;
+}
+
+.banner {
+  padding: 5px 0;
+}
+
+.banner span {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.banner form {
+  margin: 6px 0 0 0;
+  overflow: hidden;
+}
+
+.banner form .select {
+  position: relative;
+  right: -1px;
+  height: 29px;
+  line-height: 29px;
+  border: 1px solid #008B8B;
+  color: #909993;
+  font-size: 15px;
+}
+
+.banner form .select:focus {
+  outline-color: #D9D919;
+}
+
+.banner form .text {
+  width: 224px;
+  padding: 6px 6px;
+  font-size: 13px;
+  border-radius: 0;
+  border: 1px solid #008B8B;
+}
+
+.banner form .text:focus {
+  outline-color: #D9D919;
+}
+
+.banner form .button {
+  color: #FFF;
+  padding: 6px 10px;
+  margin-left: 8px;
+  font-size: 13px;
+  background: #008B8B;
+  cursor: pointer;
+  border: 0;
+}
+
+.banner form .button:focus {
+  outline-color: #D9D919;
+}
+
+.text {
+  border-radius: 0;
+  border: 1px solid #008B8B;
+  padding: 3px 5px;
+  font-size: 14px;
+}
+
+.button {
+  border: 0;
+  padding: 3px 5px;
+  cursor: pointer;
+  color: #FFF;
+  background: #008B8B;
+  font-size: 14px;
+}
+
+.button:focus {
+  outline-color: #D9D919;
+}
+
+.content {
+  padding: 0;
+  margin: 8px 0 auto;
+  border-radius: 1px;
+}
+
+.context-menu {
+  width: 160px;
+  height: 240px;
+  margin: 0 0;
+  padding-right: 8px;
+  border: 0;
+  border-radius: 5px 0 0 5px;
+  box-shadow: -5px -5px 8px #888888;
+}
+
+.context-menu ul {
+  color: #880055;
+  list-style-type: square;
+}
+
+.context-menu li {
+  font-weight: bold;
+  padding: 2px 0;
+}
+
+.context-menu li a:link, .context-menu li a:visited {
+  color: #222;
+  text-decoration: none;
+}
+
+.context-menu li a:hover, .context-menu li a:active {
+  color: #880055;
+  text-decoration: underline;
+}
+
+.content-text {
+  width: 67%;
+  margin: 10px 0 0 48px;
+}
+
+.ly-footer {
+  font-size: 14px;
+  margin: 10px 0;
+  padding: 4px 0;
+  color: #FFF;
+  background: #00796f;
+  border-radius: 6px 6px 0 0;
+}
+
+/* copyright */
+.ly-footer span {
+
+}
+
+.ly-footer a:link, .ly-footer a:visited {
+  color: #CCC;
+  text-decoration: none;
+}
+
+.ly-footer a:hover, .ly-footer a:active {
+  color: #ff00ff;
+  text-decoration: underline;
+}

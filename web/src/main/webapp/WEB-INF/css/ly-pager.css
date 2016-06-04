@@ -1,0 +1,48 @@
+/*
+ * This file is part of Linyin, Peng Wan's graduation project in Haut.
+ * Copyright (C) 2016 Peng Wan <phylame@163.com>. All Rights Reserved.
+ */
+
+@CHARSET "UTF-8";
+
+.ly-pager {
+  padding: 0 2px;
+  font-size: 13px;
+}
+
+.ly-pager ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ly-pager ul li {
+  float: left;
+  padding: 0 2px;
+}
+
+.ly-pager span .normal {
+  padding: 1px 4px;
+  background: #e3fbfd;
+  text-decoration: none;
+  border: 1px solid #CCC;
+}
+
+.ly-pager a {
+  padding: 1px 4px;
+  background: #e3fbfd;
+  text-decoration: none;
+  border: 1px solid #CCC;
+}
+
+.ly-pager a.selected {
+  background: #54e3e7;
+}
+
+.ly-pager a:link, .ly-pager a:visited {
+  color: blue;
+}
+
+.ly-pager a:hover, .ly-pager a:active {
+  color: #222;
+}

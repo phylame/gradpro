@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ This file is part of Linyin, Peng Wan's graduation project in Haut.
+  ~ Copyright (C) 2016 Peng Wan <phylame@163.com>. All Rights Reserved.
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pw.phylame.linyin.data.mapper.LoginLogMapper">
+  <resultMap id="LoginLogMap" type="pw.phylame.linyin.domain.LoginLog">
+    <id column="log_id" property="logId" jdbcType="BIGINT"/>
+    <result column="account_id" property="accountId" jdbcType="BIGINT"/>
+    <result column="time" property="time" jdbcType="TIMESTAMP"/>
+    <result column="ip" property="ip" jdbcType="VARCHAR"/>
+    <result column="type" property="type" jdbcType="CHAR"/>
+    <result column="tries" property="tries" jdbcType="BIT"/>
+    <result column="client_id" property="clientId" jdbcType="VARCHAR"/>
+    <result column="message" property="message" jdbcType="VARCHAR"/>
+  </resultMap>
+  <sql id="LoginLogColumns">
+    log_id, account_id, time, ip, type, tries, client_id, message
+  </sql>
+  <select id="selectAll">
+    select
+    <include refid="LoginLogColumns"/>
+    from login_log
+  </select>
+  <select id="selectById" resultMap="LoginLogMap" parameterType="java.lang.Long">
+    select
+    <include refid="LoginLogColumns"/>
+    from login_log
+    where log_id = #{logId,jdbcType=BIGINT}
+    limit 1
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    DELETE FROM login_log
+    WHERE log_id = #{logId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="pw.phylame.linyin.domain.LoginLog">
+    <selectKey resultType="java.lang.Long" keyProperty="logId" order="AFTER">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into login_log (account_id, time, ip,
+    type, tries, client_id, message)
+    values
+    (#{accountId,jdbcType=BIGINT},
+    #{time,jdbcType=TIMESTAMP}, #{ip,jdbcType=VARCHAR},
+    #{type,jdbcType=CHAR},
+    #{tries,jdbcType=BIT},
+    #{clientId,jdbcType=VARCHAR},
+    #{message,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateById" parameterType="pw.phylame.linyin.domain.LoginLog">
+    UPDATE login_log
+    SET account_id = #{accountId,jdbcType=BIGINT},
+    time = #{time,jdbcType=TIMESTAMP},
+    ip = #{ip,jdbcType=VARCHAR},
+    type = #{type,jdbcType=CHAR},
+    tries =
+    #{tries,jdbcType=BIT},
+    client_id = #{clientId,jdbcType=VARCHAR},
+    message = #{message,jdbcType=VARCHAR}
+    WHERE
+      log_id = #{logId,jdbcType=BIGINT}
+  </update>
+</mapper>

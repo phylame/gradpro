@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ This file is part of Linyin, Peng Wan's graduation project in Haut.
+  ~ Copyright (C) 2016 Peng Wan <phylame@163.com>. All Rights Reserved.
+  -->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+  <bean id="mqttClient" class="org.eclipse.paho.client.mqttv3.MqttClient">
+    <constructor-arg index="0" value="${mqtt.brokerURL}"/>
+    <constructor-arg index="1" value="${mqtt.clientId}"/>
+    <constructor-arg index="2" ref="mqttPersistence"/>
+  </bean>
+
+  <bean id="mqttPersistence" class="org.eclipse.paho.client.mqttv3.persist.MemoryPersistence"/>
+
+  <bean id="mqttOptions" class="pw.phylame.linyin.service.MyMqttConnectOptions" p:cleanSession="${mqtt.cleanSession}"
+        p:userName="${mqtt.username}" p:password="${mqtt.password}" p:connectionTimeout="${mqtt.connectionTimeout}"
+        p:keepAliveInterval="${mqtt.keepAliveInterval}">
+  </bean>
+</beans>

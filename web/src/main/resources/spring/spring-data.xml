@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ This file is part of Linyin, Peng Wan's graduation project in Haut.
+  ~ Copyright (C) 2016 Peng Wan <phylame@163.com>. All Rights Reserved.
+  -->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+       xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
+
+  <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close"
+        p:driverClass="${mysql.jdbc.driverClassName}" p:jdbcUrl="${mysql.jdbc.url}" p:user="${mysql.jdbc.username}"
+        p:password="${mysql.jdbc.password}" p:maxPoolSize="${mysql.c3p0.maxPoolSize}"
+        p:minPoolSize="${mysql.c3p0.minPoolSize}"
+        p:acquireIncrement="${mysql.c3p0.acquireIncrement}"
+        p:idleConnectionTestPeriod="${mysql.c3p0.idleConnectionTestPeriod}"
+        p:maxIdleTime="${mysql.c3p0.maxIdleTime}" p:maxConnectionAge="${mysql.c3p0.maxConnectionAge}"
+        p:maxStatements="${mysql.c3p0.maxStatements}"
+        p:maxStatementsPerConnection="${mysql.c3p0.maxStatementsPerConnection}"
+        p:numHelperThreads="${mysql.c3p0.numHelperThreads}"
+        p:maxAdministrativeTaskTime="${mysql.c3p0.maxAdministrativeTaskTime}"
+        p:acquireRetryAttempts="${mysql.c3p0.acquireRetryAttempts}"
+        p:acquireRetryDelay="${mysql.c3p0.acquireRetryDelay}" p:autoCommitOnClose="${mysql.c3p0.autoCommitOnClose}"
+        p:preferredTestQuery="${mysql.c3p0.preferredTestQuery}"
+        p:breakAfterAcquireFailure="${mysql.c3p0.breakAfterAcquireFailure}"
+        p:checkoutTimeout="${mysql.c3p0.checkoutTimeout}" p:factoryClassLocation=""
+        p:forceIgnoreUnresolvedTransactions="${mysql.c3p0.forceIgnoreUnresolvedTransactions}"
+        p:propertyCycle="${mysql.c3p0.propertyCycle}"
+        p:testConnectionOnCheckout="${mysql.c3p0.testConnectionOnCheckout}"
+        p:testConnectionOnCheckin="${mysql.c3p0.testConnectionOnCheckin}"
+        p:usesTraditionalReflectiveProxies="${mysql.c3p0.usesTraditionalReflectiveProxies}"/>
+
+  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" p:dataSource-ref="dataSource"
+        p:configLocation="classpath:mybatis-config.xml" p:mapperLocations="classpath:/mappers/*.xml"/>
+
+  <mybatis-spring:scan base-package="pw.phylame.linyin.data.mapper"/>
+
+  <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+        p:dataSource-ref="dataSource"/>
+
+  <tx:advice id="userTxAdvice" transaction-manager="transactionManager">
+    <tx:attributes>
+      <tx:method name="delete*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception"
+                 no-rollback-for="java.lang.RuntimeException"/>
+      <tx:method name="insert*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.RuntimeException"/>
+      <tx:method name="update*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception"/>
+
+      <tx:method name="find*" propagation="SUPPORTS"/>
+      <tx:method name="get*" propagation="SUPPORTS"/>
+      <tx:method name="select*" propagation="SUPPORTS"/>
+    </tx:attributes>
+  </tx:advice>
+
+  <aop:config>
+    <aop:pointcut id="pc" expression="execution(public * pw.phylame.linyin.service..*.*(..))"/>
+    <aop:advisor pointcut-ref="pc" advice-ref="userTxAdvice"/>
+  </aop:config>
+
+</beans>

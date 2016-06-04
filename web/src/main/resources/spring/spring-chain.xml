@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ This file is part of Linyin, Peng Wan's graduation project in Haut.
+  ~ Copyright (C) 2016 Peng Wan <phylame@163.com>. All Rights Reserved.
+  -->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+  http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <bean id="loginChain" class="org.apache.commons.chain.impl.ChainBase">
+    <constructor-arg>
+      <list>
+        <ref bean="validateClientCmd"/>
+        <ref bean="fetchJsonCmd"/>
+        <ref bean="decryptJsonCmd"/>
+        <ref bean="handleLoginCmd"/>
+      </list>
+    </constructor-arg>
+  </bean>
+
+  <bean id="logoutChain" class="org.apache.commons.chain.impl.ChainBase">
+    <constructor-arg>
+      <list>
+        <ref bean="validateClientCmd"/>
+        <ref bean="validateAccountCmd"/>
+        <ref bean="handleLogoutCmd"/>
+      </list>
+    </constructor-arg>
+  </bean>
+
+
+  <bean id="tmrChain" class="org.apache.commons.chain.impl.ChainBase">
+    <constructor-arg>
+      <list>
+        <ref bean="validateClientCmd"/>
+        <ref bean="validateAccountCmd"/>
+        <ref bean="fetchJsonCmd"/>
+        <ref bean="decryptJsonCmd"/>
+        <ref bean="handleTmrCmd"/>
+      </list>
+    </constructor-arg>
+  </bean>
+
+  <bean id="tmlChain" class="org.apache.commons.chain.impl.ChainBase">
+    <constructor-arg>
+      <list>
+        <ref bean="validateClientCmd"/>
+        <ref bean="validateAccountCmd"/>
+        <ref bean="fetchJsonCmd"/>
+        <ref bean="decryptJsonCmd"/>
+        <ref bean="handleTmlCmd"/>
+      </list>
+    </constructor-arg>
+  </bean>
+
+  <bean id="getsubChain" class="org.apache.commons.chain.impl.ChainBase">
+    <constructor-arg>
+      <list>
+        <ref bean="validateClientCmd"/>
+        <ref bean="validateAccountCmd"/>
+        <ref bean="fetchJsonCmd"/>
+        <ref bean="decryptJsonCmd"/>
+        <ref bean="getsubCmd"/>
+      </list>
+    </constructor-arg>
+  </bean>
+
+  <bean id="validateClientCmd" class="pw.phylame.linyin.service.chain.ocs.ValidateClientCommand"/>
+  <bean id="validateAccountCmd" class="pw.phylame.linyin.service.chain.ocs.ValidateAccountCommand"/>
+  <bean id="fetchJsonCmd" class="pw.phylame.linyin.service.chain.ocs.FetchJsonCommand"/>
+  <bean id="decryptJsonCmd" class="pw.phylame.linyin.service.chain.ocs.DecryptJsonCommand"/>
+  <bean id="handleLoginCmd" class="pw.phylame.linyin.service.chain.ocs.HandleLoginCommand"/>
+  <bean id="handleLogoutCmd" class="pw.phylame.linyin.service.chain.ocs.HandleLogoutCommand"/>
+  <bean id="handleTmrCmd" class="pw.phylame.linyin.service.chain.ocs.HandleTmrCommand"/>
+  <bean id="handleTmlCmd" class="pw.phylame.linyin.service.chain.ocs.HandleTmlCommand"/>
+  <bean id="getsubCmd" class="pw.phylame.linyin.service.chain.ocs.GetSubscriptionCommand"/>
+</beans>

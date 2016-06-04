@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ This file is part of Linyin, Peng Wan's graduation project in Haut.
+  ~ Copyright (C) 2016 Peng Wan <phylame@163.com>. All Rights Reserved.
+-->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pw.phylame.linyin.data.mapper.DeviceMapper">
+  <cache type="org.mybatis.caches.memcached.MemcachedCache" />
+  <cache type="org.mybatis.caches.memcached.LoggingMemcachedCache" />
+  <resultMap id="DeviceMap" type="pw.phylame.linyin.domain.Device">
+    <result column="app_id" property="clientId" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="author_id" property="authorId" jdbcType="BIGINT" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="platform_type" property="platformType" jdbcType="INTEGER" />
+    <result column="platform_name" property="platformName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="expire_time" property="expiredTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="DeviceColumns">
+    app_id, name, author_id, description, platform_type, platform_name, create_time, expire_time
+  </sql>
+  <select id="count" resultType="long">
+    select count(1)
+    from app
+  </select>
+  <select id="selectAll" resultMap="DeviceMap">
+    select
+    <include refid="DeviceColumns" />
+    from app
+  </select>
+  <select id="selectById" resultMap="DeviceMap" parameterType="java.lang.String">
+    select
+    <include refid="DeviceColumns" />
+    from app
+    where app_id = #{appId,jdbcType=VARCHAR}
+    limit 1
+  </select>
+  <select id="selectByAuthorId" parameterType="long" resultMap="DeviceMap">
+    select
+    <include refid="DeviceColumns" />
+    from app
+    where author_id = #{authorId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.String">
+    delete
+    from app
+    where app_id = #{appId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="pw.phylame.linyin.domain.Device">
+    insert into app (app_id, name, author_id, description, platform_type, platform_name, create_time, expire_time)
+    values (
+      #{clientId,jdbcType=VARCHAR},
+      #{name,jdbcType=VARCHAR},
+      #{authorId,jdbcType=BIGINT},
+      #{description,jdbcType=VARCHAR},
+      #{platformType,jdbcType=INTEGER},
+      #{platformName,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP},
+      #{expiredTime,jdbcType=TIMESTAMP}
+    )
+  </insert>
+  <update id="updateById" parameterType="pw.phylame.linyin.domain.Device">
+    update app
+    name = #{name,jdbcType=VARCHAR},
+    author_id = #{authorId,jdbcType=BIGINT},
+    description = #{description,jdbcType=VARCHAR},
+    platform_type = #{platformType,jdbcType=INTEGER},
+    platform_name = #{platformName,jdbcType=VARCHAR},
+    create_time = #{createTime,jdbcType=TIMESTAMP}
+    where app_id = #{clientId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+  ~ This file is part of Linyin, Peng Wan's graduation project in Haut.
+  ~ Copyright (C) 2016 Peng Wan <phylame@163.com>. All Rights Reserved.
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pw.phylame.linyin.data.mapper.AutoLoginMapper">
+  <resultMap id="AutoLoginMap" type="pw.phylame.linyin.domain.AutoLogin">
+    <id column="username" property="username" jdbcType="VARCHAR"/>
+    <result column="token" property="token" jdbcType="VARCHAR"/>
+    <result column="expiration" property="expiration" jdbcType="TIMESTAMP"/>
+  </resultMap>
+  <sql id="AutoLoginColumns">
+    username, token, expiration
+  </sql>
+  <select id="selectByUsername" resultMap="AutoLoginMap" parameterType="java.lang.String">
+    select
+    <include refid="AutoLoginColumns"/>
+    from auto_login
+    where username = #{username,jdbcType=VARCHAR}
+    limit 1
+  </select>
+  <delete id="deleteByUsername" parameterType="java.lang.String">
+    DELETE FROM auto_login
+    WHERE username = #{username,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insertOrUpdate" parameterType="pw.phylame.linyin.domain.AutoLogin">
+    INSERT INTO auto_login
+    (username, token, expiration)
+    VALUES (#{username,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR}, #{expiration,jdbcType=TIMESTAMP})
+    ON DUPLICATE KEY UPDATE expiration = #{expiration,jdbcType=TIMESTAMP}
+  </insert>
+</mapper>
